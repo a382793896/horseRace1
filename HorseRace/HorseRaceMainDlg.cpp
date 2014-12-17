@@ -402,7 +402,9 @@ void CHorseRaceMainDlg::RefreshTime()
 			{
 				if(iter2->race.Compare(iter->race) == 0 && iter->horse.Compare (iter2->horse + _T("-") + iter2->horse2) == 0 )
 				{
+					
 					m_list_trade_record[0].push_back(*iter2);
+					m_list_trade_record[2].erase(iter2);
 				}
 			}
 		}
@@ -636,6 +638,14 @@ bool CHorseRaceMainDlg::QTrade()
 					TradeItem.horse2 = TradeItem.horse2 + _T(")");
 					}*/
 					//判断此Item是否已经交易过了，
+					std::list<TRADE_DATA>::iterator iter;   
+					for (iter = m_list_trade_record[2].begin();iter != m_list_trade_record[2].end() ; ++iter)
+					{
+						if(iter->race.Compare(TradeItem.race) == 0 && iter->horse.Compare(TradeItem.horse) == 0 && iter->horse2.Compare( TradeItem.horse2) == 0)
+						{
+							continue;//此票出现过异常，直接跳过。
+						}
+					}
 					if(UpdateTradeTicket(nQ,TradeItem) > 0)
 					{
 						//if(nQ == 0)//连赢交易
