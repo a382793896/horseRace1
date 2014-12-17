@@ -8,6 +8,8 @@ CHttp::CHttp(void)
 	//图片和内存流初值
 	m_hGlobal = NULL;
 	m_pStream = NULL;
+
+	
 }
 
 CHttp::~CHttp(void)
@@ -82,6 +84,7 @@ CString CHttp::GetHTML(CString url, CString header, CString PostData, bool isPos
 
 	////建立连接
 	CHttpConnection *pConnection = m_session.GetHttpConnection(domain);
+	
 	CHttpFile *pFile = pConnection->OpenRequest
 		(
 		(isPost) ? CHttpConnection::HTTP_VERB_POST : CHttpConnection::HTTP_VERB_GET,
@@ -124,7 +127,7 @@ CString CHttp::GetHTML(CString url, CString header, CString PostData, bool isPos
 		delete pFile;
 		pFile = NULL;
 		//异常返回空串
-		return CString("");
+		return CString("throw_erorr");
 	}
 
 	//读取返回HTML的内容
@@ -186,7 +189,7 @@ CString CHttp::RevHTML(CHttpFile *pFile)
 		catch (...)
 		{
 			//异常返回空串
-			return CString("");
+			return CString("throw_erorr");
 		}
 
 		if (len <= 0)

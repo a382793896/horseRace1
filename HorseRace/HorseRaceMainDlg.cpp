@@ -623,10 +623,15 @@ bool CHorseRaceMainDlg::QTrade()
 						//if(nQ == 0)//连赢交易
 						//{
 						//接下来进行交易
-						if(m_HttpHandule.QTrade(&TradeItem))
+						int nRet = m_HttpHandule.QTrade(&TradeItem);
+						if(nRet == 1)//交易成功
 						{
 							//交易成功添加交易记录
 							AddTradeRecord(nQ,TradeItem);
+						}
+						else if(nRet ==2)//交易超时异常。
+						{
+							AddTradeRecord(nQ+2,TradeItem);//这里添加异常记录。
 						}
 						//}
 						//else
@@ -754,11 +759,18 @@ bool CHorseRaceMainDlg::QpTrade()
 			if(UpdateTradeTicket(1,temNode)>0)//获取还需要吃多少票
 			{
 				temNode.amount.Format(_T("%d"),atoi(szCondition.amount) -nLoop ) ;
-				if(m_HttpHandule.QpTrade(&temNode))
+				int nRet = m_HttpHandule.QpTrade(&temNode);
+				if(nRet == 1)//交易成功
 				{
 					temNode.amount = szCondition.amount;
 					AddTradeRecord(1,temNode);
 					break;
+				}
+				else if(nRet == 2)//异常返回。
+				{
+					temNode.amount = szCondition.amount;
+					AddTradeRecord(1+2,temNode);
+					//添加异常记录。
 				}
 				++nLoop;
 			}

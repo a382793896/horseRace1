@@ -45,7 +45,7 @@ public:
 	HANDLE m_hThread,m_hThreadTrade;
 	BOOL m_bThreadExit,m_bLogined,m_bTradeRecord,m_bStopOneKey,m_bStopQTrade,m_bStopQpTrade;
 	std::list<TRADE_DATA> m_list_condition;
-	std::list<TRADE_DATA> m_list_trade_record[2];
+	std::list<TRADE_DATA> m_list_trade_record[4];
 	afx_msg void OnBnClickedButton3();
 	afx_msg void OnBnClickedButton4();
 	void RefreshTime();//Ë¢ÐÂÊ±¼ä£¬

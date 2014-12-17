@@ -35,7 +35,7 @@ BOOL CHttpHandule::InitLogin()
 	{
 		content =  m_http.get(url);
 		TRACE(_T("111:")+content);
-		if(content.IsEmpty())
+		if(content.IsEmpty() || content.Compare(_T("throw_erorr")) == 0)
 		{
 			continue;
 		}
@@ -63,7 +63,7 @@ BOOL CHttpHandule::InitLogin()
 	while(nLoopCount--)
 	{
 		content = m_http.get(url+_T("_index.jsp"),Head);
-		if(content.IsEmpty())
+		if(content.IsEmpty()||content.Compare(_T("throw_erorr")) == 0)
 		{
 			continue;
 		}
@@ -153,7 +153,7 @@ BOOL CHttpHandule::Login(CString UserName,CString PassWord,CString code,CString 
 	{
 
 		strRet = m_http.post(m_Host+_T("login"),head,data);
-		if(!strRet.IsEmpty()) break;
+		if(!strRet.IsEmpty() && strRet.Compare(_T("throw_erorr")) != 0) break;
 	}
 
 	if(strRet.Find(_T("validate_pin.jsp")) >0 )
@@ -164,7 +164,7 @@ BOOL CHttpHandule::Login(CString UserName,CString PassWord,CString code,CString 
 		while(1)
 		{
 			strRet = m_http.get(m_Host+_T("validate_pin.jsp"),m_Head);
-			if(!strRet.IsEmpty())
+			if(!strRet.IsEmpty() && strRet.Compare(_T("throw_erorr")) != 0)
 			{
 				break;
 			}
@@ -193,7 +193,7 @@ BOOL CHttpHandule::Login(CString UserName,CString PassWord,CString code,CString 
 			return FALSE;
 		}
 		strRet = m_http.get(m_Host+_T("dispatch.jsp"),m_Head);
-		if(strRet.IsEmpty()) return FALSE;
+		if(strRet.IsEmpty() || strRet.Compare(_T("throw_erorr")) == 0) return FALSE;
 		m_Host = m_iniFile.GetString(APPNAME,_T("MainHost"));//更换域名
 		m_Head = _T("Accept-Language: zh-CN\nUser-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)\nHost: racing.ctb988.net\nConnection: Keep-Alive");
 
@@ -201,7 +201,7 @@ BOOL CHttpHandule::Login(CString UserName,CString PassWord,CString code,CString 
 		while(1)
 		{
 			strRet = m_http.get(m_Host+_T("terms.jsp"),m_Head);
-			if(!strRet.IsEmpty())
+			if(!strRet.IsEmpty() && strRet.Compare(_T("throw_erorr")) != 0)
 			{
 				break;
 			}
@@ -220,7 +220,7 @@ BOOL CHttpHandule::Login(CString UserName,CString PassWord,CString code,CString 
 		while(1)
 		{
 			strRet = m_http.get(m_Host+_T("playerhk.jsp"),m_Head);
-			if(!strRet.IsEmpty())
+			if(!strRet.IsEmpty() && strRet.Compare(_T("throw_erorr")) != 0)
 			{
 				break;
 			}
@@ -282,7 +282,7 @@ std::list<TRADE_DATA>*  CHttpHandule::GetTimeData(CString & time_data,CString st
 	tem.Format(_T("datastore?race_date=%s&race_type=3H&rc=%s&q=q&x=0.3682902207461527&tnum=1&txnrnd=0.43144710102172645"),m_RunTime,strRc);
 	m_Host = m_iniFile.GetString(APPNAME,_T("MainHost"));
 	tem =  m_http.get(m_Host+tem,m_Head);
-	if(tem.IsEmpty())
+	if(tem.IsEmpty() || tem.Compare(_T("throw_erorr")) == 0)
 	{
 		return NULL;
 	}
@@ -322,7 +322,7 @@ std::list<TRADE_DATA>*  CHttpHandule::GetTimeData(CString & time_data,CString st
 	m_List_Trade.clear();
 	tem.Format(_T("datastore?race_date=%s&race_type=3H&rc=0&q=q&x=0.3682902207461527&tnum=1&txnrnd=0.43144710102172645"),m_RunTime);
 	tem =  m_http.get(m_Host+tem,m_Head);
-	if(tem.IsEmpty())
+	if(tem.IsEmpty() || tem.Compare(_T("throw_erorr")) == 0)
 	{
 		return NULL;
 	}
@@ -390,7 +390,7 @@ std::list<QDATA>* CHttpHandule::GetQData(int nQ)
 		while(nLoopCount--)
 		{
 			tem = m_http.get(url,m_DataHead);
-			if(tem.IsEmpty() || tem.GetLength() < 300)
+			if(tem.IsEmpty() || tem.GetLength() < 300 || tem.Compare(_T("throw_erorr")) == 0)
 			{
 				TRACE(tem);
 				continue;
@@ -508,9 +508,13 @@ int  CHttpHandule::QTrade( TRADE_DATA * condition)
 		m_Host,condition->ticket,condition->race,condition->horse,condition->horse2,condition->amount,condition->limit,m_RunTime);
 
 	CString strRet =  m_http.get(strUrl,m_Head);
-	if(strRet.Find(_T("已所有被证实")) < 0 )
+	if(strRet.Find(_T("已所有被证实")) < 0  )
 	{
 		return 0;//0代表执行失败
+	}
+	else if(strRet.Compare(_T("throw_erorr")) == 0)//返回异常
+	{
+		return 2;//
 	}
 	return 1;//1代表连赢交易
 }
@@ -526,7 +530,10 @@ int  CHttpHandule::QpTrade( TRADE_DATA * condition)
 	{
 		return 0;//0代表执行失败
 	}
-
+	else if(strRet.Compare(_T("throw_erorr")) == 0)//返回异常
+	{
+		return 2;//
+	}
 	return 1;//1代表位置Q交易
 }
 
@@ -542,6 +549,10 @@ int  CHttpHandule::BetQTrade( TRADE_DATA * condition)
 	if(strRet.Find(_T("已所有被证实")) < 0 )
 	{
 		return 0;//0代表执行失败
+	}
+	else if(strRet.Compare(_T("throw_erorr")) == 0)//返回异常
+	{
+		return 2;//
 	}
 	return 1;//1代表连赢交易
 }
