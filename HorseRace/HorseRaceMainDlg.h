@@ -62,7 +62,7 @@ public:
 	static DWORD WINAPI ThreadQpTrade(
 		_In_  LPVOID lpParameter
 		);
-	static DWORD WINAPI ThreadLoin(
+	static DWORD WINAPI ThreadInit(
 		_In_  LPVOID lpParameter
 		);
 	afx_msg void OnBnClickedButton5();

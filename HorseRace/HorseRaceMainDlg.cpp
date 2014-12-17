@@ -15,7 +15,7 @@ IMPLEMENT_DYNAMIC(CHorseRaceMainDlg, CDialogEx)
 	CHorseRaceMainDlg::CHorseRaceMainDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CHorseRaceMainDlg::IDD, pParent)
 	, m_UserName(_T(""))
-	, m_PassWord(_T("="))
+	, m_PassWord(_T(""))
 	, m_Code(_T(""))
 	, m_PinCode(_T(""))
 	//, m_UserName(_T("8602hp"))
@@ -102,6 +102,7 @@ void CHorseRaceMainDlg::UserLogin()
 	else
 	{
 		//MessageBox(_T("登陆失败"));
+		CloseHandle(CreateThread(NULL,NULL,ThreadInit,this,NULL,NULL));
 	}
 	return;
 }
@@ -170,7 +171,7 @@ void CHorseRaceMainDlg::RefreshQData()
 					}
 
 				}
-				nSize = list_data->size();;
+				nSize = list_data->size();
 				for (int j = 0; j< nSize;++j)
 				{
 					int nTem = m_ListQ[i].GetItemCount();
@@ -277,6 +278,7 @@ BOOL CHorseRaceMainDlg::OnInitDialog()
 	m_hThread =  CreateThread(NULL,NULL,ThreadProc,this,NULL,NULL);
 	m_hThreadTrade =  CreateThread(NULL,NULL,ThreadQTrade,this,NULL,NULL);
 	m_hThreadTrade =  CreateThread(NULL,NULL,ThreadQpTrade,this,NULL,NULL);
+	CloseHandle(CreateThread(NULL,NULL,ThreadInit,this,NULL,NULL));
 	// TODO:  在此添加额外的初始化
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常: OCX 属性页应返回 FALSE
@@ -362,7 +364,7 @@ void CHorseRaceMainDlg::RefreshTime()
 	}
 	else
 	{
-		GetDlgItem(IDC_STATIC_TIME)->SetWindowText(TemTime+_T("分钟后开跑"));
+		GetDlgItem(IDC_STATIC_TIME)->SetWindowText(_T("场") + m_TradeRace + _T(": ") + TemTime+_T("分钟后开跑"));
 		if(m_bDown)
 		{
 			int m = m_DownS / 60;
@@ -958,10 +960,10 @@ void CHorseRaceMainDlg::SetCurStastua(CString msg)
 	SetDlgItemText(IDC_STATIC_STASTUS,msg);
 }
 //登陆线程
-DWORD WINAPI CHorseRaceMainDlg::ThreadLoin(_In_ LPVOID lpParameter)
+DWORD WINAPI CHorseRaceMainDlg::ThreadInit(_In_ LPVOID lpParameter)
 {
 	CHorseRaceMainDlg* dlg = (CHorseRaceMainDlg*) lpParameter;
-	dlg->UserLogin();
+	dlg->InitNet();
 	return 0;
 }
 
