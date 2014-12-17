@@ -29,9 +29,9 @@ IMPLEMENT_DYNAMIC(CHorseRaceMainDlg, CDialogEx)
 	m_bStopQTrade = TRUE;
 	m_bStopQpTrade = TRUE;
 	m_bStopOneKey = TRUE;
-	//m_UserName = _T("8607hp");
-	//m_PassWord = _T("aabb112233,,");
-	//m_PinCode = _T("112233");
+	m_UserName = _T("8607hp");
+	m_PassWord = _T("aabb112233,,");
+	m_PinCode = _T("112233");
 }
 
 CHorseRaceMainDlg::~CHorseRaceMainDlg()
@@ -552,6 +552,7 @@ void CHorseRaceMainDlg::OnBnClickedButton5()
 		SetTimer(100,1000,NULL);
 		}*/
 		GetDlgItem(IDC_BUTTON5)->EnableWindow(FALSE);//开始交易按钮   失效
+		GetDlgItem(IDC_COMBO2)->EnableWindow(FALSE);
 		SetCurStastua(_T("开始对设置的条件进行扫描。。。"));
 	}
 }
@@ -632,7 +633,9 @@ bool CHorseRaceMainDlg::QTrade()
 						else if(nRet ==2)//交易超时异常。
 						{
 							AddTradeRecord(nQ+2,TradeItem);//这里添加异常记录。
+							MessageBox(_T("交易异常")+TradeItem.race + _T("ma") + TradeItem.horse + _T("-")+TradeItem.horse2);
 						}
+
 						//}
 						//else
 						//{
@@ -771,6 +774,7 @@ bool CHorseRaceMainDlg::QpTrade()
 					temNode.amount = szCondition.amount;
 					AddTradeRecord(1+2,temNode);
 					//添加异常记录。
+					MessageBox(_T("交易异常")+temNode.race + _T("ma") + temNode.horse + _T("-")+temNode.horse2);
 				}
 				++nLoop;
 			}
@@ -1006,6 +1010,7 @@ void CHorseRaceMainDlg::OnBnClickedButton13()
 	GetDlgItem(IDC_BUTTON5)->EnableWindow(TRUE);
 	SetCurStastua(_T("已经结束交易扫描"));
 	GetDlgItem(IDC_BUTTON14)->EnableWindow(TRUE);
+	GetDlgItem(IDC_COMBO2)->EnableWindow(TRUE);
 	m_bDown = false;
 }
 
