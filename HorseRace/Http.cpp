@@ -8,8 +8,9 @@ CHttp::CHttp(void)
 	//图片和内存流初值
 	m_hGlobal = NULL;
 	m_pStream = NULL;
-
-	
+	m_session.SetOption(INTERNET_OPTION_CONNECT_TIMEOUT,0xFFFFFFFF);
+	m_session.SetOption(INTERNET_OPTION_DATA_RECEIVE_TIMEOUT,0xFFFFFFFF);
+	m_session.SetOption(INTERNET_OPTION_DATA_SEND_TIMEOUT,0xFFFFFFFF);
 }
 
 CHttp::~CHttp(void)

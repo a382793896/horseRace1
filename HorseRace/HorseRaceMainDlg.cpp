@@ -29,9 +29,9 @@ IMPLEMENT_DYNAMIC(CHorseRaceMainDlg, CDialogEx)
 	m_bStopQTrade = TRUE;
 	m_bStopQpTrade = TRUE;
 	m_bStopOneKey = TRUE;
-	m_UserName = _T("8607hp");
-	m_PassWord = _T("aabb112233,,");
-	m_PinCode = _T("112233");
+	//m_UserName = _T("8607hp");
+	//m_PassWord = _T("aabb112233,,");
+	//m_PinCode = _T("112233");
 }
 
 CHorseRaceMainDlg::~CHorseRaceMainDlg()
@@ -393,6 +393,23 @@ void CHorseRaceMainDlg::RefreshTime()
 		GetDlgItem(IDC_STATIC_WINNING)->SetWindowText(_T("HK")+strWin);
 	}
 
+	if(list_data)
+	{
+		std::list<TRADE_DATA>::iterator iter;
+		for (std::list<TRADE_DATA>::iterator iter2 = m_list_trade_record[2].begin() ; iter2 != m_list_trade_record[2].end(); ++iter2)
+		{
+			for(iter = list_data->begin(); iter != list_data->end(); ++iter);
+			{
+				if(iter2->race.Compare(iter->race) == 0 && iter->horse.Compare (iter2->horse + _T("-") + iter2->horse2) == 0 )
+				{
+					m_list_trade_record[0].push_back(*iter2);
+				}
+			}
+		}
+	}
+	
+
+	
 	CString tem;
 	if(!m_bTradeRecord)
 	{
@@ -889,7 +906,7 @@ void CHorseRaceMainDlg::AddTradeRecord(int nQ,TRADE_DATA & record)
 DWORD WINAPI CHorseRaceMainDlg::ThreadProc(_In_ LPVOID lpParameter)
 {
 	CHorseRaceMainDlg* dlg = (CHorseRaceMainDlg*) lpParameter;
-	dlg->InitNet();
+	//dlg->InitNet();
 
 	while(!dlg->m_bThreadExit)
 	{
