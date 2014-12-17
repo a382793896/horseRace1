@@ -101,7 +101,9 @@ void CHorseRaceMainDlg::UserLogin()
 	}
 	else
 	{
-		//MessageBox(_T("登陆失败"));
+		MessageBox(_T("登陆失败"));
+		GetDlgItem(IDC_BUTTON1)->EnableWindow(FALSE);
+		GetDlgItem(IDC_BUTTON2)->EnableWindow(FALSE);
 		CloseHandle(CreateThread(NULL,NULL,ThreadInit,this,NULL,NULL));
 	}
 	return;
@@ -353,10 +355,10 @@ bool CHorseRaceMainDlg::RefreshAllData()
 }
 void CHorseRaceMainDlg::RefreshTime()
 {
-	CString TemTime;
+	CString TemTime,TemRace;
 	CString strWin;
 	std::list<TRADE_DATA>* list_data = NULL;
-	list_data = m_HttpHandule.GetTimeData(TemTime,m_TradeRace,strWin);
+	list_data = m_HttpHandule.GetTimeData(TemTime,m_TradeRace,strWin,TemRace);
 
 	if(TemTime.IsEmpty())
 	{
@@ -364,7 +366,9 @@ void CHorseRaceMainDlg::RefreshTime()
 	}
 	else
 	{
-		GetDlgItem(IDC_STATIC_TIME)->SetWindowText(_T("场") + m_TradeRace + _T(": ") + TemTime+_T("分钟后开跑"));
+		CString strRc;
+		
+		GetDlgItem(IDC_STATIC_TIME)->SetWindowText(TemRace+ _T("   ") + TemTime+_T("分钟后开跑"));
 		if(m_bDown)
 		{
 			int m = m_DownS / 60;

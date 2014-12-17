@@ -58,7 +58,7 @@ public:
 	BOOL Login(CString UserName,CString PassWord,CString code,CString PinCode);
 	BOOL SetParentHwnd(CDialogEx * MainDlg);
 	std::list<QDATA> * GetQData(int nQ = 1);
-	std::list<TRADE_DATA>*  GetTimeData(CString & time_data,CString strRc,CString & strWin);
+	std::list<TRADE_DATA>*  GetTimeData(CString & time_data,CString strRc,CString & strWin,CString & StrRace);
 	int QTrade( TRADE_DATA * condition);
 	int QpTrade( TRADE_DATA * condition);
 	void SetCurStatus(CString msg);

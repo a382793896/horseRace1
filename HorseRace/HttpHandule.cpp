@@ -272,7 +272,7 @@ void CHttpHandule::SetCurStatus(CString msg)
 		((CHorseRaceMainDlg*)m_MainDlg)->SetCurStastua(msg);
 	}
 }
-std::list<TRADE_DATA>*  CHttpHandule::GetTimeData(CString & time_data,CString strRc,CString & strWin)
+std::list<TRADE_DATA>*  CHttpHandule::GetTimeData(CString & time_data,CString strRc,CString & strWin,CString & StrRace)
 {
 	CString tem;
 	if(strRc.IsEmpty())
@@ -293,6 +293,14 @@ std::list<TRADE_DATA>*  CHttpHandule::GetTimeData(CString & time_data,CString st
 	pos1 = pos1 + strlen(_T("id=txtTIMER>"));
 	pos2 = tem.Find(_T("<"),pos1);
 	time_data = tem.Mid(pos1,pos2-pos1);
+
+	//¿ªÅÚ³¡´Î
+
+	pos1 = tem.Find(_T("id=txtTOTE>"));
+	if(pos1<0) return NULL;
+	pos1 = pos1 + strlen(_T("id=txtTOTE>"));
+	pos2 = tem.Find(_T("<"),pos1);
+	StrRace = tem.Mid(pos1,pos2-pos1);
 	//ÊäÓ®
 	pos1 = tem.Find(_T("color: #FF0000"));
 	if(pos1 < 0)

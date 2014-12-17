@@ -16,7 +16,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 中文(简体，中国) resources
+// Chinese (Simplified, PRC) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
@@ -128,7 +128,7 @@ BEGIN
     EDITTEXT        IDC_EDIT_PIN,38,94,165,14,ES_AUTOHSCROLL
     CONTROL         "",IDC_LIST_Q1,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,9,207,143,176
     PUSHBUTTON      "初始化网络",IDC_BUTTON4,283,135,27,14,NOT WS_VISIBLE | WS_DISABLED
-    CTEXT           "分钟后开跑",IDC_STATIC_TIME,261,117,71,8
+    CTEXT           "分钟后开跑",IDC_STATIC_TIME,220,117,112,8
     CONTROL         "",IDC_LIST_Q4,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,177,205,143,176
     GROUPBOX        "连赢下注",IDC_STATIC,2,194,154,192
     GROUPBOX        "位置Q下注",IDC_STATIC,170,194,154,192
@@ -467,7 +467,7 @@ BEGIN
     IDP_SOCKETS_INIT_FAILED "Windows 套接字初始化失败。"
 END
 
-#endif    // 中文(简体，中国) resources
+#endif    // Chinese (Simplified, PRC) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
