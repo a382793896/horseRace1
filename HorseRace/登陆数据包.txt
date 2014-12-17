@@ -1,0 +1,174 @@
+网站地址：cn.ctb988.net
+帐号：8602hp
+密码：aabb778899=
+验证码：778899
+密码加密方式
+mask(valid+code+mask("voodoo_people_"+uid+mask(pass)));
+8607hp
+aabb112233,,
+112233
+pin验证
+var u='8602hp';
+var r1='c98190b3-6284-4692-9b5f-fdfc8d4de0be';
+var r2='882980d1-cae7-4fbd-855b-dd5277b55d22';
+
+document.getElementById('code').value = mask(r1+r2+mask("pin_"+u+code));
+
+Accept: text/html, application/xhtml+xml, */*
+Referer: http://www.ctb988.net/
+Accept-Language: zh-CN
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)
+Accept-Encoding: gzip, deflate
+Host: www.ctb988.net
+Connection: Keep-Alive
+
+
+
+
+
+
+
+http://secure.ctb988.net/login.jsp?e1b404e7-2678-4a07-9608-33e7fbcd8456
+登陆地址
+http://www.ctb988.net/login.jsp?e=3&s=true
+//1
+<script>location.replace('?cce22fdc-9b7d-41ea-848d-df0c1a23e6bc')</script>
+<input name="valid" type="hidden" id="valid" value="a4dd9273-4ab0-4990-99a2-372f0a8a1a20"/>
+
+
+
+
+登陆数据包
+
+
+POST /login HTTP/1.1
+Accept: text/html, application/xhtml+xml, */*
+Referer: http://secure.ctb988.net/_index.jsp
+Accept-Language: zh-CN
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+Host: secure.ctb988.net
+Content-Length: 138
+Connection: Keep-Alive
+Pragma: no-cache
+Cookie: lang=CH; load_balancer=99581d17-d1e4-4abd-a1dd-40e9decc3327; JSESSIONID=1887CBFD96F07751C7968352EAD25733.node29
+
+uid2=&pass2=&code2=&uid=8602hp&pass=95798f33c764ae67b6f243c95d4bf176ccfd9b29&code=85224&valid=aa7d3e07-664c-4102-b71f-7ae31ba03971&lang=CH
+
+
+PIN安全认证
+
+
+POST /verifypin HTTP/1.1
+Accept: text/html, application/xhtml+xml, */*
+Referer: https://secure.ctb988.net/validate_pin.jsp?sml=m
+Accept-Language: zh-CN
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)
+Content-Type: application/x-www-form-urlencoded
+Accept-Encoding: gzip, deflate
+Host: secure.ctb988.net
+Content-Length: 45
+Connection: Keep-Alive
+Cache-Control: no-cache
+Cookie: lang=CH; load_balancer=99581d17-d1e4-4abd-a1dd-40e9decc3327; JSESSIONID=472011F6529A9FD44C7B98A9906A9B59.node29
+
+code=fb2c3a3d523d31d97c962401fd8844fc82776614
+
+
+http://data.ctb988.net/qdata?q=1&race_date=26-11-2014&race_type=3H&rc=0&m=HK&c=2
+
+
+交易成功
+请求
+http://racing.ctb988.net/forecast?flag=0&Tix=10&Race=1&Hs1=1&Hs2=4&fctype=0&Q=Q&type=EAT&overflow=0&amount=80&fclmt=650&race_type=3H&race_date=23-11-2014&show=1&rd=0.8419011533023089
+Tix=10 票数
+Race=1  种类都一样
+&Hs1=1&Hs2=4   马
+
+返回
+<script>document.domain = 'ctb988.net';</script><script>top.reply('bookings','你的吃票交易已所有被证实');</script>
+
+
+交易失败
+请求
+http://racing.ctb988.net/forecast?flag=0&Tix=10&Race=1&Hs1=1&Hs2=3&fctype=0&Q=Q&type=EAT&overflow=0&amount=83&fclmt=650&race_type=3H&race_date=23-11-2014&show=1&rd=0.10938942215590247
+返回
+<script>document.domain = 'ctb988.net';</script><script>top.reply('bookings','@对不起！此交易将超过您的限定交易数额。所以不能进行。请联络您的代理，以增加可以交易的数额。 此场可进行的交易数额只剩下 : <strong>$0</strong> 而已');</script>
+
+
+txtTIMER  关键字
+开跑时间
+GET http://racing.ctb988.net/datastore?race_date=30-11-2014&race_type=3H&rc=1&q=q&x=0.3682902207461527&tnum=1&txnrnd=0.43144710102172645 HTTP/1.1
+Host: racing.ctb988.net
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: zh-cn,zh;q=0.8,en-us;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+Cookie: lang=CH; load_balancer=99581d17-d1e4-4abd-a1dd-40e9decc3327; bet_alert_8602hp=y; live_alert_8602hp=y; JSESSIONID=4743DA64EC1FFAFEFAEADF193E194906.node01; sml=M
+Connection: keep-alive
+Cache-Control: max-age=0
+
+<script>document.domain = 'ctb988.net';</script><meta http-equiv=refresh content=3><pre id=AC_BAL>HK$9,886.44</pre><pre id=AC_PL>HK$14.80</pre><pre id=PT_FLAG>0</pre><pre id=nws>&lt;span class=GN_GN&gt; 星期日 (30-11-2014) 香港 - 沙田 (日马) 赛事第一场将在中午十二点三十五分开跑, &lt;/span&gt;
+&lt;span class=OR_OR&gt; 新加坡- 克兰芝 (日马) 赛事第一场将在中午十二点五十五分开跑,
+&lt;span class=BL_BL&gt; 雪兰莪 (日马) 赛事第一场将在下午一点十五分开跑 及 &lt;/span&gt;
+&lt;span class=NUT_NUT&gt; 香港 - 海外 (日马) 赛事第一场将在下午二点五十五分开跑。祝你好运！！ &lt;/span&gt;</pre><pre id=nws2>&lt;span class=UK&gt; 星期六 (29-11-2014) 英国(马) -  纽卡斯尔, 托斯特, 紐百利 及 班戈 走地投注 (Jalan) (英国赔率) 赛事, &lt;/span&gt;
+&lt;span class=IR&gt; 爱尔兰 (马) - 费尔豪斯 走地投注 (Jalan) (爱尔兰赔率) 赛事 及 &lt;/span&gt;
+&lt;span class=SA&gt; 星期日 (30-11-2014) 英国(马) -  胡佛汉顿 走地投注 (Jalan) (英国赔率) 赛事 及 &lt;/span&gt;
+&lt;span class=SW&gt; 新西兰(狗) - 曼努考 (澳洲S-TAB及NSW赔率) 赛事 将在 星期六 (29/11) 下午五点三十分开放投注。祝你好运 ！！&lt;/span&gt;
+</pre><pre id=nws3>&lt;span class=YL_YL&gt; 星期日 (30-11-2014) 日本(马) - 東京 及 京都 走地投注 (Jalan) (日本赔率) 赛事 及 日本 - 马 (日本赔率) 赛事已经开放投注。祝你好运 !! &lt;/span&gt;
+</pre><pre id=nwsByLoc>欢迎 !&lt;/span&gt; &lt;span class=RD_RD&gt;香港 沙田 割马: R4-10</pre><pre id=nwsByLoc2> </pre><pre id=nwsByLoc3>&lt;span class=YL_YL&gt; 香港 换马消息：第4场8号由 (秋月春風)顶上, 骑师(韋達); 第4场9号由 (名馬)顶上, 骑师(薛寶力)&lt;/span&gt;&lt;span class=OR_OR&gt; 通告 : 星期日 (30-11-2014) 香港(马) - 沙田 走地投注(Jalan) (香港赔率) 赛事 开放于 场1 至 场10。&lt;/span&gt; &lt;span class=GN_GN&gt; 星期日 (30-11-2014) 香港 - 沙田 (日马) 赛事第一场将在中午十二点三十五分开跑 。祝你好运！！&lt;/span&gt;</pre><pre id=reultsMini></pre><pre id=reultsMini2></pre><pre id=liveMode>55,0,7,0,1,1,true</pre><pre id=liveRaces>1,2,3,4,5,6,7,8,9,10</pre><pre id=txtDate>星期日,11月30日</pre><pre id=txtTOTE>12:35pm - Race 1</pre><pre id=txtTIMER>1241</pre><pre id=mrqNOTES>其士鋁工程讓賽 - 40-15 - 第5班 - 1400米 - 草地C - 奖金 港币$575,000</pre><pre id=mrqNOTES2>CHEVALIER ALUMINIUM ENGINEERING HANDICAP - 40-15 - CL 5 - 1400m - Turf C - Stakes HK$575,000</pre><pre id=txtGOING>NA</pre><scri举例p.getTRANS();</script>
+
+
+
+GET http://racing.ctb988.net/forecast?flag=0&Tix=2&Race=1&Hs1=(1&Hs2=9)&fctype=1&Q=Q&type=EAT&overflow=0&amount=82&fclmt=300&race_type=3H&race_date=03-12-2014&show=1&rd=0.010205246332188278 HTTP/1.1
+Accept: text/html, application/xhtml+xml, */*
+
+
+交易记录
+http://racing.ctb988.net/new_history_live.jsp?uid=8602hp
+关键字
+q_tbl_detail_3H_01
+
+
+[MF#Q#E_1_1-9]
+ [Q#E#1#1-9#2#84#700]
+[C1#.#-2#1_1_9#0]
+[MF#Q#E_1_1-11]
+ [Q#E#1#1-11#2#84#400]
+[C1#.#-2#1_1_11#0]
+[MF#QP#E_1_(1-9)]
+ [QP#E#1#(1-9)#2#83#300]
+ [QP#E#1#(1-9)#6#85#400]
+[C1#.#-8#1_1_9#1]
+[E#1]
+[S#2]
+[MF#Q#E_2_4-6]
+ [Q#E#2#4-6#2#81#550]
+[C1#.#-2#2_4_6#0]
+[E#2]
+
+
+
+
+<script>document.domain = 'ctb988.net';</script><meta http-equiv=refresh content=3><pre id=AC_BAL>HK$69,004.72</pre><pre id=AC_PL>HK$178.65</pre><pre id=PT_FLAG>0</pre><pre id=nws>&lt;span class=GN_GN&gt; 星期日 (14-12-2014) 香港 - 沙田 (日马) 赛事第一场将在中午十二点二十五分开跑, &lt;/span&gt;
+
+
+<script>document.domain = 'ctb988.net';</script><meta http-equiv=refresh content=3><pre id=AC_BAL>HK$12,915.97</pre><pre id=AC_PL>HK$145.09</pre><pre id=PT_FLAG>0</pre><pre id=nws>&lt;span class=GN_GN&gt; 星期日 (14-12-2014) 香港 - 沙田 (日马) 赛事第一场将在中午十二点二十五分开跑, &lt;/span&gt;
+
+
+<script>document.domain = 'ctb988.net';</script><meta http-equiv=refresh content=3><pre id=AC_BAL>HK$96,906.26</pre><pre id=AC_PL>HK<span style="color: #FF0000;">($3,093.74)</span></pre><pre id=PT_FLAG>0</pre><pre id=nws>&lt;span class=GN_GN&gt; 星期日 (14-12-2014) 香港 - 沙田 (日马) 赛事第一场将在中午十二点二十五分开跑, &lt;/span&gt;
+
+赌数据
+
+GET http://racing.ctb988.net/forecast?flag=0&Tix=2&Race=1&Hs1=2&Hs2=5&fctype=0&Q=Q&type=BET&overflow=0&amount=84&fclmt=700&race_type=3H&race_date=17-12-2014&show=0&rd=0.04882211822803245 HTTP/1.1
+Accept: text/html, application/xhtml+xml, */*
+Referer: http://racing.ctb988.net/Q.jsp?race_type=3H&race_date=17-12-2014&sml=m
+Accept-Language: zh-CN
+User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)
+Accept-Encoding: gzip, deflate
+Host: racing.ctb988.net
+Connection: Keep-Alive
+Cookie: bet_alert_8602hp=y; live_alert_8602hp=y; bet_alert_8607hp=y; live_alert_8607hp=y; bet_alert_8603hp=y; live_alert_8603hp=y; lang=CH; load_balancer=99581d17-d1e4-4abd-a1dd-40e9decc3327; sml=M; JSESSIONID=06EC6193A6291402D1BBA7B405E4191A.node03
+
+
