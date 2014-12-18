@@ -755,7 +755,7 @@ bool CHorseRaceMainDlg::QpTrade()
 	//	}
 	//}
 	//return true;
-	std::list<TRADE_DATA>::iterator iter;
+	
 	int nRet = 0;
 	//读取连赢Q交易成功的记录，根据场，马，折扣 吃票，。。。
 	//不管在位置Q存在不存在，直接吃，失败降折扣1-2.还是不行就，赌回去。
@@ -764,6 +764,7 @@ bool CHorseRaceMainDlg::QpTrade()
 	GetDlgItem(IDC_EDIT6)->GetWindowText(szCondition.amount);
 	GetDlgItem(IDC_EDIT7)->GetWindowText(szCondition.limit);
 	//判断场次和马次是否交易过
+	std::list<TRADE_DATA>::iterator iter;
 	for (iter = m_list_trade_record[0].begin(); iter != m_list_trade_record[0].end(); ++iter)
 	{
 
