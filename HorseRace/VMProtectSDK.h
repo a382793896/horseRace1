@@ -18,11 +18,14 @@ __declspec(dllimport) void __stdcall VMProtectBeginUltra(const char *);
 __declspec(dllimport) void __stdcall VMProtectBeginVirtualizationLockByKey(const char *);
 __declspec(dllimport) void __stdcall VMProtectBeginUltraLockByKey(const char *);
 __declspec(dllimport) void __stdcall VMProtectEnd(void);
+
+// utils
 __declspec(dllimport) BOOL __stdcall VMProtectIsDebuggerPresent(BOOL);
 __declspec(dllimport) BOOL __stdcall VMProtectIsVirtualMachinePresent(void);
 __declspec(dllimport) BOOL __stdcall VMProtectIsValidImageCRC(void);
 __declspec(dllimport) char * __stdcall VMProtectDecryptStringA(const char *value);
 __declspec(dllimport) wchar_t * __stdcall VMProtectDecryptStringW(const wchar_t *value);
+__declspec(dllimport) BOOL __stdcall VMProtectFreeString(void *value);
 
 // licensing
 enum VMProtectSerialStateFlags
@@ -59,6 +62,27 @@ __declspec(dllimport) INT  __stdcall VMProtectSetSerialNumber(const char * Seria
 __declspec(dllimport) INT  __stdcall VMProtectGetSerialNumberState();
 __declspec(dllimport) BOOL __stdcall VMProtectGetSerialNumberData(VMProtectSerialNumberData *pData, UINT nSize);
 __declspec(dllimport) INT  __stdcall VMProtectGetCurrentHWID(char * HWID, UINT nSize);
+
+// activation
+enum VMProtectActivationFlags
+{
+	ACTIVATION_OK = 0,
+	ACTIVATION_SMALL_BUFFER,
+	ACTIVATION_NO_CONNECTION,
+	ACTIVATION_BAD_REPLY,
+	ACTIVATION_BANNED,
+	ACTIVATION_CORRUPTED,
+	ACTIVATION_BAD_CODE,
+	ACTIVATION_ALREADY_USED,
+	ACTIVATION_SERIAL_UNKNOWN,
+	ACTIVATION_EXPIRED
+};
+
+__declspec(dllimport) INT __stdcall VMProtectActivateLicense(const char *code, char *serial, int size);
+__declspec(dllimport) INT __stdcall VMProtectDeactivateLicense(const char *serial);
+__declspec(dllimport) INT __stdcall VMProtectGetOfflineActivationString(const char *code, char *buf, int size);
+__declspec(dllimport) INT __stdcall VMProtectGetOfflineDeactivationString(const char *serial, char *buf, int size);
+
 
 #ifdef __cplusplus
 }

@@ -16,7 +16,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Chinese (Simplified, PRC) resources
+// 中文(简体，中国) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
@@ -165,7 +165,7 @@ BEGIN
     PUSHBUTTON      "确定",IDC_BUTTON6,294,97,37,14
     PUSHBUTTON      "强制停止交易",IDC_BUTTON13,237,30,50,14
     EDITTEXT        IDC_EDIT8,266,56,28,14,ES_AUTOHSCROLL | ES_NUMBER
-    LTEXT           "秒停止交易",IDC_STATIC,298,59,35,8
+    LTEXT           "分钟停止交易",IDC_STATIC,298,59,42,8
     CONTROL         "开启",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,291,137,30,10
     LTEXT           "我的输赢",IDC_STATIC,216,78,28,8
     LTEXT           "HK",IDC_STATIC_WINNING,267,78,61,8
@@ -467,7 +467,7 @@ BEGIN
     IDP_SOCKETS_INIT_FAILED "Windows 套接字初始化失败。"
 END
 
-#endif    // Chinese (Simplified, PRC) resources
+#endif    // 中文(简体，中国) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

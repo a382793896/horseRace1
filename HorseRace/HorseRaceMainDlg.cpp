@@ -369,18 +369,10 @@ void CHorseRaceMainDlg::RefreshTime()
 		CString strRc;
 		
 		GetDlgItem(IDC_STATIC_TIME)->SetWindowText(TemRace+ _T("   ") + TemTime+_T("分钟后开跑"));
-		if(m_bDown)
-		{
-			int m = m_DownS / 60;
-			int s = m_DownS % 60;
-			if(s>0 )++m;
-			if(m >= atoi(TemTime)  )
+			if( (m_DownS == atoi(TemTime) &&  m_bDown ) || atoi(TemTime) ==0)
 			{
-				SetTimer(100,1000,NULL);
+				OnBnClickedButton13();
 			}
-		}
-		
-
 	}
 
 	//我的输赢
@@ -763,7 +755,7 @@ bool CHorseRaceMainDlg::QpTrade()
 	//	}
 	//}
 	//return true;
-	std::list<TRADE_DATA>::iterator iter,record;
+	std::list<TRADE_DATA>::iterator iter;
 	int nRet = 0;
 	//读取连赢Q交易成功的记录，根据场，马，折扣 吃票，。。。
 	//不管在位置Q存在不存在，直接吃，失败降折扣1-2.还是不行就，赌回去。
@@ -1033,7 +1025,7 @@ void CHorseRaceMainDlg::OnBnClickedButton13()
 	m_bStopQTrade = TRUE;
 	m_bStopQpTrade = TRUE;
 	m_bStopOneKey = TRUE;
-	KillTimer(100);
+	//KillTimer(100);
 	GetDlgItem(IDC_BUTTON5)->EnableWindow(TRUE);
 	SetCurStastua(_T("已经结束交易扫描"));
 	GetDlgItem(IDC_BUTTON14)->EnableWindow(TRUE);
@@ -1058,7 +1050,7 @@ void CHorseRaceMainDlg::OnTimer(UINT_PTR nIDEvent)
 		--m_DownS;
 		if(m_DownS < 1)
 		{
-			KillTimer(nIDEvent);
+			//KillTimer(nIDEvent);
 			OnBnClickedButton13();
 			m_DownS = 0;
 		}
