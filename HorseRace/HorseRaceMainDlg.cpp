@@ -590,7 +590,7 @@ bool CHorseRaceMainDlg::QTrade()
 	for (i = 0 ; i < m_ListQ[nQ].GetItemCount() ; ++i)
 	{
 		tem =  m_ListQ[nQ].GetItemText(i,3);
-		if(szCondition.amount.Compare(tem) == 0)//уш©ш
+		if( atoi( szCondition.amount) <= atoi(tem) )//уш©ш
 		{
 			tem =  m_ListQ[nQ].GetItemText(i,4);
 			if(atoi(tem) <= atoi(szCondition.limit))//оч╤Н
