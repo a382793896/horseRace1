@@ -765,33 +765,33 @@ bool CHorseRaceMainDlg::QpTrade()
 	GetDlgItem(IDC_EDIT7)->GetWindowText(szCondition.limit);
 	//判断场次和马次是否交易过
 	std::list<TRADE_DATA>::iterator iter;
-	for (iter = m_list_trade_record[0].begin(); iter != m_list_trade_record[0].end(); ++iter)
+	for (iter = m_list_trade_record[0].begin(); iter != m_list_trade_record[0].end(); )
 	{
 
 		//场次，马次。   iter连赢交易成功记录，
 		//nRet = atoi(record->ticket) - atoi(iter->ticket);
 		int nLoop = 0;
 		TRADE_DATA temNode = *iter;
-		temNode.amount = szCondition.amount;
+		temNode.amount = iter->TraceAmount;
 		temNode.limit = szCondition.limit;
 		temNode.ticket = szCondition.ticket;
 		nLoop = 0;
 		while(nLoop < 3)
 		{
-			temNode.amount = szCondition.amount;
+			temNode.amount = iter->TraceAmount;
 			if(UpdateTradeTicket(1,temNode)>0)//获取还需要吃多少票
 			{
-				temNode.amount.Format(_T("%d"),atoi(szCondition.amount) -nLoop ) ;
+				temNode.amount.Format(_T("%d"),atoi(iter->TraceAmount) -nLoop ) ;
 				int nRet = m_HttpHandule.QpTrade(&temNode);
 				if(nRet == 1)//交易成功
 				{
-					temNode.amount = szCondition.amount;
+					temNode.amount = iter->TraceAmount;
 					AddTradeRecord(1,temNode);
 					break;
 				}
 				else if(nRet == 2)//异常返回。
 				{
-					temNode.amount = szCondition.amount;
+					temNode.amount = iter->TraceAmount;
 					AddTradeRecord(1+2,temNode);
 					//添加异常记录。
 					MessageBox(_T("交易异常")+temNode.race + _T("ma") + temNode.horse + _T("-")+temNode.horse2);
@@ -805,6 +805,7 @@ bool CHorseRaceMainDlg::QpTrade()
 			
 			
 		}
+		
 		if(nLoop == 3)//降1-2折扣没有成功
 		{
 			temNode = *iter;
@@ -812,11 +813,15 @@ bool CHorseRaceMainDlg::QpTrade()
 			{
 				if(m_HttpHandule.BetQTrade(&temNode))
 				{
-					m_list_trade_record[0].erase(iter);//赌成功，去掉次记录，如果下次有符合的条件，继续吃
+					iter = m_list_trade_record[0].erase(iter);//赌成功，去掉次记录，如果下次有符合的条件，继续吃
 					break;
 				}
 				temNode.amount.Format(_T("%d"),atoi(temNode.amount)+1);
 			}
+		}
+		else
+		{
+			++iter;
 		}
 		
 	}
@@ -839,25 +844,27 @@ bool CHorseRaceMainDlg::IsExsitCondition(int nQ,TRADE_DATA * szNode)
 			tem2.Format(_T("%s-%s"),szNode->horse,szNode->horse2);
 			if(tem.Compare(tem2) == 0)//马相等
 			{
-				tem =  m_ListQ[nQ].GetItemText(nIndex,3);
+				tem =  m_ListQ[nQ].GetItemText(nIndex,4);
 				if(nQ == 1)//位置Q
-					GetDlgItem(IDC_EDIT6)->GetWindowText(tem2);
-				else
-					GetDlgItem(IDC_EDIT2)->GetWindowText(tem2);
-				if(/*szNode->amount*/ atoi(tem2) <= atoi(tem) )//折扣    //按不同的折扣吃
-				{
-					tem =  m_ListQ[nQ].GetItemText(nIndex,4);
-					if(nQ == 1)//位置Q
 					GetDlgItem(IDC_EDIT7)->GetWindowText(tem2);
-					else
+				else
 					GetDlgItem(IDC_EDIT3)->GetWindowText(tem2);
-					if(atoi( tem2) >= atoi(tem))//限额
+				if(atoi( tem2) >= atoi(tem))//限额
+				{
+					tem =  m_ListQ[nQ].GetItemText(nIndex,3);
+					if(nQ == 1)//位置Q
+						GetDlgItem(IDC_EDIT6)->GetWindowText(tem2);
+					else
+						GetDlgItem(IDC_EDIT2)->GetWindowText(tem2);
+					if(/*szNode->amount*/ atoi(tem2) <= atoi(tem) )//折扣    //按不同的折扣吃
 					{
+						szNode->TraceAmount = tem;//获取位置Q的交易折扣。
 						return true;
 					}
 					continue;
 				}
 				continue;
+
 			}
 			continue;
 		}

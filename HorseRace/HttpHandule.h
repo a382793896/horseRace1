@@ -25,8 +25,9 @@ typedef struct tagTrade
 	CString ticket;
 	CString amount;
 	CString limit;
-	CString shui;//税
+	CString shui;//连赢查找到的位置Q交易折扣
 	CString zongshu;//总数
+	CString TraceAmount;
 }TRADE_DATA;
 typedef struct tagTime
 {
