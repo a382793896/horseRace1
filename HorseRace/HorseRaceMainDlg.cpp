@@ -844,14 +844,14 @@ bool CHorseRaceMainDlg::IsExsitCondition(int nQ,TRADE_DATA * szNode)
 					GetDlgItem(IDC_EDIT6)->GetWindowText(tem2);
 				else
 					GetDlgItem(IDC_EDIT2)->GetWindowText(tem2);
-				if(/*szNode->amount*/tem2.Compare(tem) == 0)//折扣    //按不同的折扣吃
+				if(/*szNode->amount*/ atoi(tem2) <= atoi(tem) )//折扣    //按不同的折扣吃
 				{
 					tem =  m_ListQ[nQ].GetItemText(nIndex,4);
 					if(nQ == 1)//位置Q
 					GetDlgItem(IDC_EDIT7)->GetWindowText(tem2);
 					else
 					GetDlgItem(IDC_EDIT3)->GetWindowText(tem2);
-					if(atoi( tem2) >= atoi(tem))
+					if(atoi( tem2) >= atoi(tem))//限额
 					{
 						return true;
 					}
