@@ -981,6 +981,7 @@ DWORD WINAPI CHorseRaceMainDlg::ThreadQTrade(_In_ LPVOID lpParameter)
 			continue;
 		}
 		dlg->QTrade();//开始连赢交易
+		Sleep(200);
 	}
 
 	return 0;
@@ -997,6 +998,7 @@ DWORD WINAPI CHorseRaceMainDlg::ThreadQpTrade(_In_ LPVOID lpParameter)
 			continue;
 		}
 		dlg->QpTrade();//开始位置交易
+		Sleep(200);
 	}
 	return 0;
 }
