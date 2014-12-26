@@ -29,9 +29,9 @@ IMPLEMENT_DYNAMIC(CHorseRaceMainDlg, CDialogEx)
 	m_bStopQTrade = TRUE;
 	m_bStopQpTrade = TRUE;
 	m_bStopOneKey = TRUE;
-	//m_UserName = _T("8607hp");
-	//m_PassWord = _T("aabb112233,,");
-	//m_PinCode = _T("112233");
+	m_UserName = _T("8607hp");
+	m_PassWord = _T("aabb112233,,");
+	m_PinCode = _T("112233");
 }
 
 CHorseRaceMainDlg::~CHorseRaceMainDlg()

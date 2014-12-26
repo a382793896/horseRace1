@@ -194,7 +194,7 @@ BOOL CHttpHandule::Login(CString UserName,CString PassWord,CString code,CString 
 		}
 		strRet = m_http.get(m_Host+_T("dispatch.jsp"),m_Head);
 		if(strRet.IsEmpty() || strRet.Compare(_T("throw_erorr")) == 0) return FALSE;
-		m_Host = m_iniFile.GetString(APPNAME,_T("MainHost"));//更换域名
+		m_Host = m_iniFile.GetString(APPNAME,_T("LoginHost"));//更换域名
 		m_Head = _T("Accept-Language: zh-CN\nUser-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)\nHost: racing.ctb988.net\nConnection: Keep-Alive");
 
 		//CImage * img  = m_http.GetImg(m_Host+_T("/pixel.png?0.4909987307623288"));//更换cookie
