@@ -388,7 +388,7 @@ void CHorseRaceMainDlg::RefreshTime()
 	if(list_data)
 	{
 		std::list<TRADE_DATA>::iterator iter;
-		for (std::list<TRADE_DATA>::iterator iter2 = m_list_trade_record[2].begin() ; iter2 != m_list_trade_record[2].end(); ++iter2)
+		for (std::list<TRADE_DATA>::iterator iter2 = m_list_trade_record[2].begin() ; iter2 != m_list_trade_record[2].end();)
 		{
 			for(iter = list_data->begin(); iter != list_data->end(); ++iter);
 			{
@@ -396,9 +396,11 @@ void CHorseRaceMainDlg::RefreshTime()
 				{
 					
 					m_list_trade_record[0].push_back(*iter2);
-					m_list_trade_record[2].erase(iter2);
+					iter2 = m_list_trade_record[2].erase(iter2);
 				}
 			}
+			if(iter2!= m_list_trade_record[2].end())
+			 ++iter2;
 		}
 	}
 	
@@ -770,6 +772,12 @@ bool CHorseRaceMainDlg::QpTrade()
 
 		//场次，马次。   iter连赢交易成功记录，
 		//nRet = atoi(record->ticket) - atoi(iter->ticket);
+		if(m_TradeRace.Compare(_T("每场")) != 0)
+			if(m_TradeRace.IsEmpty() || m_TradeRace.Compare(iter->race) != 0)
+			{
+				++iter;
+				continue;
+			}
 		int nLoop = 0;
 		TRADE_DATA temNode = *iter;
 		temNode.amount = iter->TraceAmount;
@@ -899,7 +907,7 @@ void CHorseRaceMainDlg::AddTradeRecord(int nQ,TRADE_DATA & record)
 	//添加交易记录，如果之前交易过，那么直接加上这次的交易票数就行了
 	for (iter = m_list_trade_record[nQ].begin(); iter != m_list_trade_record[nQ].end(); ++iter)
 	{
-		if(record.race.Compare(iter->race) == 0 && iter->horse.Compare(record.race+_T("-")+record.horse2) == 0)
+		if(record.race.Compare(iter->race) == 0 && iter->horse.Compare(record.horse)== 0 && record.horse2.Compare(iter->horse2) == 0)
 		{
 			CString tem;
 			tem.Format(_T("%d"),(atoi(iter->ticket) + atoi(record.ticket)));
@@ -936,8 +944,9 @@ DWORD WINAPI CHorseRaceMainDlg::ThreadProc(_In_ LPVOID lpParameter)
 void CHorseRaceMainDlg::OnClose()
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	
 	m_bThreadExit = TRUE;
-
+	OnBnClickedButton13();
 	WaitForSingleObject(m_hThread,5000) ;
 
 	CloseHandle(m_hThread);

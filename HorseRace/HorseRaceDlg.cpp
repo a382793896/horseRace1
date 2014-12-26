@@ -206,7 +206,7 @@ void CHorseRaceDlg::OnBnClickedButton1()
 	// TODO: 在此添加控件通知处理程序代码
 	UpdateData(TRUE);
 	VMProtectBegin(_T("Allyz"));
-	//SendMessage(M_LOGIN_SUCCESS,1);
+	SendMessage(M_LOGIN_SUCCESS,1);
 	if(Allyz(2,(TCHAR*)m_UserName.GetString(),(TCHAR*)m_PassWord.GetString(),(TCHAR*)m_QQ.GetString()))
 	{
 		if(!Allyz(2,(TCHAR*)m_UserName.GetString(),(TCHAR*)(m_PassWord+_T(" ")).GetString(),(TCHAR*)m_QQ.GetString()))
