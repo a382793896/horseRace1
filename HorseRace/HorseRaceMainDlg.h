@@ -42,7 +42,7 @@ public:
 	CString m_Code;
 	CString m_PinCode;
 	CListCtrl m_ListQ[4];
-	HANDLE m_hThread,m_hThreadTrade;
+	HANDLE m_hThread,m_hThreadQTrade,m_hThreadQpTrade;
 	BOOL m_bThreadExit,m_bLogined,m_bTradeRecord,m_bStopOneKey,m_bStopQTrade,m_bStopQpTrade;
 	std::list<TRADE_DATA> m_list_condition;
 	std::list<TRADE_DATA> m_list_trade_record[4];
@@ -92,4 +92,5 @@ public:
 	virtual void OnOK();
 	afx_msg void OnBnClickedButton14();
 	afx_msg void OnBnClickedButton7();
+	int UpdateBetTicket(int nQ,TRADE_DATA & record);
 };

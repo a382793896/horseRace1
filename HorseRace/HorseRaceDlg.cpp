@@ -64,14 +64,14 @@ CHorseRaceDlg::CHorseRaceDlg(CWnd* pParent /*=NULL*/)
 	, m_QQ(_T(""))
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
-	//HMODULE hModule =  LoadLibrary(_T("cepal.dll"));
-	//if(hModule)
-	//{
-	//	wang = (CheckNet)GetProcAddress(hModule,_T("wang"));
-	//	Allyz = (LoginAndRegister)GetProcAddress(hModule,_T("Allyz"));
-	//	daoqi = (QueryTime)GetProcAddress(hModule,_T("daoqi"));
-	//	chong = (SaveMoney)GetProcAddress(hModule,_T("chong"));
-	//}
+	HMODULE hModule =  LoadLibrary(_T("cepal.dll"));
+	if(hModule)
+	{
+		wang = (CheckNet)GetProcAddress(hModule,_T("wang"));
+		Allyz = (LoginAndRegister)GetProcAddress(hModule,_T("Allyz"));
+		daoqi = (QueryTime)GetProcAddress(hModule,_T("daoqi"));
+		chong = (SaveMoney)GetProcAddress(hModule,_T("chong"));
+	}
 
 }
 
@@ -135,19 +135,19 @@ BOOL CHorseRaceDlg::OnInitDialog()
 	{
 		SendMessage(WM_CLOSE,0,0);
 	}
-	//if(wang == NULL || chong == NULL || Allyz == NULL || daoqi == NULL)
-	//{
-	//	MessageBox( _T("Dll丢失无法运行软件"));
-	//	SendMessage(WM_CLOSE);
-	//}
-	//if(wang())
-	//{
-	//	MessageBox( _T("连接网络失败，请检查网络"));
-	//	SendMessage(WM_CLOSE);
-	//}else
-	//{
-	//	SetDlgItemText(IDC_STATICSTATUS,_T("连接网络成功"));
-	//}
+	if(wang == NULL || chong == NULL || Allyz == NULL || daoqi == NULL)
+	{
+		MessageBox( _T("Dll丢失无法运行软件"));
+		SendMessage(WM_CLOSE);
+	}
+	if(wang())
+	{
+		MessageBox( _T("连接网络失败，请检查网络"));
+		SendMessage(WM_CLOSE);
+	}else
+	{
+		SetDlgItemText(IDC_STATICSTATUS,_T("连接网络成功"));
+	}
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
@@ -206,20 +206,20 @@ void CHorseRaceDlg::OnBnClickedButton1()
 	// TODO: 在此添加控件通知处理程序代码
 	UpdateData(TRUE);
 	VMProtectBegin(_T("Allyz"));
-	SendMessage(M_LOGIN_SUCCESS,1);
-	//if(Allyz(2,(TCHAR*)m_UserName.GetString(),(TCHAR*)m_PassWord.GetString(),(TCHAR*)m_QQ.GetString()))
-	//{
-	//	if(!Allyz(2,(TCHAR*)m_UserName.GetString(),(TCHAR*)(m_PassWord+_T(" ")).GetString(),(TCHAR*)m_QQ.GetString()))
-	//	{
-	//		SendMessage(M_LOGIN_SUCCESS,1);
-	//		return ;
-	//	}
-	//}
-	//CString msg;
-	//msg = daoqi((TCHAR*)m_UserName.GetString());
-	//MessageBox(_T("登陆失败"));
-	//SetDlgItemText(IDC_STATICSTATUS,_T("登陆失败..到期时间：")+msg);
-	
+	//SendMessage(M_LOGIN_SUCCESS,1);
+	if(Allyz(2,(TCHAR*)m_UserName.GetString(),(TCHAR*)m_PassWord.GetString(),(TCHAR*)m_QQ.GetString()))
+	{
+		if(!Allyz(2,(TCHAR*)m_UserName.GetString(),(TCHAR*)(m_PassWord+_T(" ")).GetString(),(TCHAR*)m_QQ.GetString()))
+		{
+			SendMessage(M_LOGIN_SUCCESS,1);
+			return ;
+		}
+	}
+	CString msg;
+	msg = daoqi((TCHAR*)m_UserName.GetString());
+	MessageBox(_T("登陆失败"));
+	SetDlgItemText(IDC_STATICSTATUS,_T("登陆失败..到期时间：")+msg);
+
 	VMProtectEnd();
 
 }

@@ -29,9 +29,9 @@ IMPLEMENT_DYNAMIC(CHorseRaceMainDlg, CDialogEx)
 	m_bStopQTrade = TRUE;
 	m_bStopQpTrade = TRUE;
 	m_bStopOneKey = TRUE;
-	m_UserName = _T("8607hp");
-	m_PassWord = _T("aabb112233,,");
-	m_PinCode = _T("112233");
+	//m_UserName = _T("8607hp");
+	//m_PassWord = _T("aabb112233,,");
+	//m_PinCode = _T("112233");
 }
 
 CHorseRaceMainDlg::~CHorseRaceMainDlg()
@@ -278,8 +278,8 @@ BOOL CHorseRaceMainDlg::OnInitDialog()
 	m_bTradeRecord = FALSE;
 	m_bStopOneKey = TRUE;
 	m_hThread =  CreateThread(NULL,NULL,ThreadProc,this,NULL,NULL);
-	m_hThreadTrade =  CreateThread(NULL,NULL,ThreadQTrade,this,NULL,NULL);
-	m_hThreadTrade =  CreateThread(NULL,NULL,ThreadQpTrade,this,NULL,NULL);
+	m_hThreadQTrade =  CreateThread(NULL,NULL,ThreadQTrade,this,NULL,NULL);
+	m_hThreadQpTrade =  CreateThread(NULL,NULL,ThreadQpTrade,this,NULL,NULL);
 	CloseHandle(CreateThread(NULL,NULL,ThreadInit,this,NULL,NULL));
 	// TODO:  在此添加额外的初始化
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -369,9 +369,14 @@ void CHorseRaceMainDlg::RefreshTime()
 		CString strRc;
 		
 		GetDlgItem(IDC_STATIC_TIME)->SetWindowText(TemRace+ _T("   ") + TemTime+_T("分钟后开跑"));
-			if( (m_DownS == atoi(TemTime) &&  m_bDown ) || atoi(TemTime) ==0)
+			if( (m_DownS == atoi(TemTime) &&  m_bDown )  )
 			{
 				OnBnClickedButton13();
+			}
+			else if(atoi(TemTime) ==0)
+			{
+				SetTimer(100,1000,NULL);
+				m_DownS = 30;
 			}
 	}
 
@@ -772,6 +777,10 @@ bool CHorseRaceMainDlg::QpTrade()
 
 		//场次，马次。   iter连赢交易成功记录，
 		//nRet = atoi(record->ticket) - atoi(iter->ticket);
+		if(m_bStopQpTrade)
+		{
+			return true;//需要停止交易
+		}
 		if(m_TradeRace.Compare(_T("每场")) != 0)
 			if(m_TradeRace.IsEmpty() || m_TradeRace.Compare(iter->race) != 0)
 			{
@@ -810,8 +819,6 @@ bool CHorseRaceMainDlg::QpTrade()
 			{
 				break;
 			}
-			
-			
 		}
 		
 		if(nLoop == 3)//降1-2折扣没有成功
@@ -819,9 +826,11 @@ bool CHorseRaceMainDlg::QpTrade()
 			temNode = *iter;
 			while(atoi(temNode.amount)<100)
 			{
+				if(UpdateBetTicket(0,temNode) >0 )//获取需要赌几个票。根据连赢吃的票
 				if(m_HttpHandule.BetQTrade(&temNode))
 				{
-					iter = m_list_trade_record[0].erase(iter);//赌成功，去掉次记录，如果下次有符合的条件，继续吃
+					AddTradeRecord(1,temNode);//	赌成功，位置q 和连赢不在吃票，。此票不在理会。
+					//iter = m_list_trade_record[0].erase(iter);//赌成功，去掉次记录，如果下次有符合的条件，继续吃
 					break;
 				}
 				temNode.amount.Format(_T("%d"),atoi(temNode.amount)+1);
@@ -900,6 +909,26 @@ int CHorseRaceMainDlg::UpdateTradeTicket(int nQ,TRADE_DATA & record)
 	return atoi(record.ticket);
 }
 
+//判断是否赌票过.//返回需要赌的票数.以及上次交易的折扣
+int CHorseRaceMainDlg::UpdateBetTicket(int nQ,TRADE_DATA & record)
+{
+	std::list<TRADE_DATA>::iterator iter;
+	int nRet = 0;
+	//判断场次和马次是否交易过
+	for (iter = m_list_trade_record[nQ].begin(); iter != m_list_trade_record[nQ].end(); ++iter)
+	{
+		if(record.race.Compare(iter->race) == 0 && iter->horse.Compare(record.horse)== 0 && record.horse2.Compare(iter->horse2) == 0)
+		{
+			//交易过
+			nRet = atoi(iter->ticket);
+			record.ticket.Format(_T("%d"),nRet);
+			//record.amount = iter->amount;
+			return nRet;
+		}
+	}
+	return atoi(record.ticket);
+}
+
 //添加交易记录
 void CHorseRaceMainDlg::AddTradeRecord(int nQ,TRADE_DATA & record)
 {
@@ -934,7 +963,7 @@ DWORD WINAPI CHorseRaceMainDlg::ThreadProc(_In_ LPVOID lpParameter)
 			continue;
 		}
 		dlg->RefreshAllData();//刷新全部数据
-		Sleep(1000);//1秒刷新一次
+		Sleep(400);//1秒刷新一次
 
 	}
 	return 0;
@@ -947,11 +976,12 @@ void CHorseRaceMainDlg::OnClose()
 	
 	m_bThreadExit = TRUE;
 	OnBnClickedButton13();
+	TerminateThread(m_hThreadQpTrade,0);
+	TerminateThread(m_hThreadQTrade,0);
+	TerminateThread(m_hThread,0);
+	Sleep(1000);
 	WaitForSingleObject(m_hThread,5000) ;
-
 	CloseHandle(m_hThread);
-
-
 	CDialogEx::OnClose();
 }
 //作废
@@ -990,7 +1020,7 @@ DWORD WINAPI CHorseRaceMainDlg::ThreadQTrade(_In_ LPVOID lpParameter)
 			continue;
 		}
 		dlg->QTrade();//开始连赢交易
-		Sleep(200);
+		Sleep(50);
 	}
 
 	return 0;
@@ -1007,7 +1037,7 @@ DWORD WINAPI CHorseRaceMainDlg::ThreadQpTrade(_In_ LPVOID lpParameter)
 			continue;
 		}
 		dlg->QpTrade();//开始位置交易
-		Sleep(200);
+		Sleep(50);
 	}
 	return 0;
 }
