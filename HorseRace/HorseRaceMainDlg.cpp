@@ -378,7 +378,7 @@ void CHorseRaceMainDlg::RefreshTime()
 				SetTimer(100,1000,NULL);
 				m_DownS = 30;
 			}
-	}
+	}  
 
 	//Œ“µƒ ‰”Æ
 	if(strWin.IsEmpty())

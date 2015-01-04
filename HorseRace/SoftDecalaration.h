@@ -1,6 +1,6 @@
 #pragma once
 
-
+  
 // CSoftDecalaration ¶Ô»°¿ò
 
 class CSoftDecalaration : public CDialogEx

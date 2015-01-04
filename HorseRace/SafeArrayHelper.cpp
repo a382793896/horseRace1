@@ -4,7 +4,7 @@
 //
 //	Author:		Ernest Laurentin
 //	E-mail:		elaurentin@sympatico.ca
-//
+//  
 //	Version history
 //
 //	1.0	- Initial release.

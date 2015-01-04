@@ -1,6 +1,6 @@
 #pragma once
 
-
+  
 // CTabSheet
 #define MAX_PAGES 10
 

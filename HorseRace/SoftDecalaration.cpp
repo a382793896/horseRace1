@@ -6,7 +6,7 @@
 #include "SoftDecalaration.h"
 #include "afxdialogex.h"
 
-
+  
 // CSoftDecalaration ¶Ô»°¿ò
 
 IMPLEMENT_DYNAMIC(CSoftDecalaration, CDialogEx)

@@ -4,7 +4,7 @@
 //
 //	Author:		Ernest Laurentin
 //	E-mail:		elaurentin@sympatico.ca
-//
+//  
 //	This class implements MSScript control
 //	It can interface script from resource file or text file
 //

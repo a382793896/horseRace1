@@ -169,7 +169,7 @@ BOOL CHttpHandule::Login(CString UserName,CString PassWord,CString code,CString 
 				break;
 			}
 		}
-
+		  
 		int pos1  = 0,pos2 = 0;
 		pos1 = strRet.Find(_T("r1='"));
 

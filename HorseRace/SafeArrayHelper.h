@@ -1,6 +1,6 @@
 #ifndef _SAFEARRAYHELPER_H_
 #define _SAFEARRAYHELPER_H_
-
+   
 class CSafeArrayHelper
 {
 	public:

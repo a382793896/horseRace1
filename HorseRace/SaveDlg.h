@@ -1,6 +1,6 @@
 #pragma once
 
-
+  
 // CSaveDlg ¶Ô»°¿ò
 
 class CSaveDlg : public CDialogEx

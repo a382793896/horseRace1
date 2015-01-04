@@ -7,7 +7,7 @@
 *
 * INITIAL CODING : Ernest Laurentin (EL)
 *************************************************************/
-
+  
 #ifndef _SCRIPT_OBJECT_
 #define _SCRIPT_OBJECT_
 #include <xstring>

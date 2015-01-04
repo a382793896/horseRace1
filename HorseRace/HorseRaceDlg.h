@@ -1,6 +1,8 @@
 
 // HorseRaceDlg.h : м╥нд╪Ч
 //
+ 
+
 
 #pragma once
 #include "ScriptObject.h"

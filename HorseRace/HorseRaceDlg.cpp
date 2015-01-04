@@ -200,7 +200,7 @@ HCURSOR CHorseRaceDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-
+  
 void CHorseRaceDlg::OnBnClickedButton1()
 {
 	// TODO: 在此添加控件通知处理程序代码

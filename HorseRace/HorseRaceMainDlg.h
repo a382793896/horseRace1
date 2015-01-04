@@ -76,7 +76,7 @@ public:
 	int UpdateTradeTicket(int nQ,TRADE_DATA & szItem);
 	afx_msg void OnBnClickedButton8();
 	void SetCurStastua(CString msg);
-	void UserLogin();
+	void UserLogin(); 
 	afx_msg void OnBnClickedButton6();
 	bool QpTrade();
 	CButton m_Qcheck;
@@ -94,3 +94,6 @@ public:
 	afx_msg void OnBnClickedButton7();
 	int UpdateBetTicket(int nQ,TRADE_DATA & record);
 };
+
+
+

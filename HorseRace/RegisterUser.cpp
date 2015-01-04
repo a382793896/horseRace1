@@ -1,6 +1,6 @@
 // RegisterUser.cpp : 实现文件
 //
-
+  
 #include "stdafx.h"
 #include "HorseRace.h"
 #include "RegisterUser.h"

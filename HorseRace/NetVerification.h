@@ -11,6 +11,6 @@ typedef bool (WINAPI * LoginAndRegister)
 	);
 //到期时间查询
 typedef TCHAR * (WINAPI * QueryTime)(TCHAR UserName[]);
-
+  
 //充值
 typedef int (WINAPI * SaveMoney)(TCHAR UserName[],TCHAR cKey[]);

@@ -1,6 +1,6 @@
 #pragma once
 
-
+  
 // CRegisterUser ¶Ô»°¿ò
 
 class CRegisterUser : public CDialogEx

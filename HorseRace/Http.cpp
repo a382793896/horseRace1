@@ -198,7 +198,7 @@ CString CHttp::RevHTML(CHttpFile *pFile)
 		buf[len] = '\0';
 		RevBuf += buf;
 	}
-
+	  
 	//对返回的内容正确编码
 	RevBuf = EncodeHTML(RevBuf);
 

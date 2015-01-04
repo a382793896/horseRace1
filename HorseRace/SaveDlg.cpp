@@ -6,7 +6,7 @@
 #include "SaveDlg.h"
 #include "afxdialogex.h"
 #include "NetVerification.h"
-
+  
 extern SaveMoney				chong ;
 // CSaveDlg ¶Ô»°¿ò
 

@@ -6,6 +6,8 @@
 #define  APPNAME _T("BASE")
 #define  CONDITIONNAME _T("CONDITION")
 
+
+
 typedef struct tagQData
 {
 	int race;//³¡
