@@ -823,10 +823,10 @@ bool CHorseRaceMainDlg::QpTrade()
 		
 		if(nLoop == 3)//降1-2折扣没有成功
 		{
-			temNode = *iter;
+			temNode = *iter;//根据连赢吃的票，来确定需要赌多少票。
 			while(atoi(temNode.amount)<100)
 			{
-				if(UpdateBetTicket(0,temNode) >0 )//获取需要赌几个票。根据连赢吃的票
+				if(UpdateBetTicket(1,temNode) >0 )//获取需要赌几个票。根据位置Q吃的票，判断还需要多少票
 				if(m_HttpHandule.BetQTrade(&temNode))
 				{
 					AddTradeRecord(1,temNode);//	赌成功，位置q 和连赢不在吃票，。此票不在理会。
@@ -909,7 +909,7 @@ int CHorseRaceMainDlg::UpdateTradeTicket(int nQ,TRADE_DATA & record)
 	return atoi(record.ticket);
 }
 
-//判断是否赌票过.//返回需要赌的票数.以及上次交易的折扣
+//判断是否赌票过.//返回需要赌的票数.以及上次交易的折扣    判断赌票也就是在位置Q的记录中查询。
 int CHorseRaceMainDlg::UpdateBetTicket(int nQ,TRADE_DATA & record)
 {
 	std::list<TRADE_DATA>::iterator iter;
@@ -920,7 +920,7 @@ int CHorseRaceMainDlg::UpdateBetTicket(int nQ,TRADE_DATA & record)
 		if(record.race.Compare(iter->race) == 0 && iter->horse.Compare(record.horse)== 0 && record.horse2.Compare(iter->horse2) == 0)
 		{
 			//交易过
-			nRet = atoi(iter->ticket);
+			nRet =atoi(record.ticket) - atoi(iter->ticket);//位置Q已经吃的票，   需要赌的票-已经赌的票，
 			record.ticket.Format(_T("%d"),nRet);
 			//record.amount = iter->amount;
 			return nRet;
